@@ -3,12 +3,14 @@
 import { useState } from 'react';
 import useStudents from '@/hooks/useStudents';
 import AddStudent from './AddStudent/AddStudent';
+import Student from './Student/Student';
 import type StudentInterface from '@/types/StudentInterface';
 import type CreateStudentInterface from '@/types/CreateStudentInterface';
 
 const Students = (): React.ReactElement => {
-  const { students, createStudent, isCreating } = useStudents();
+  const { students, createStudent, deleteStudent, isCreating, isDeleting } = useStudents();
   const [error, setError] = useState<string | null>(null);
+  const [deletingId, setDeletingId] = useState<number | null>(null);
 
   const handleCreateStudent = async (studentData: CreateStudentInterface) => {
     try {
@@ -20,11 +22,24 @@ const Students = (): React.ReactElement => {
     }
   };
 
+  const handleDeleteStudent = async (id: number) => {
+    try {
+      setError(null);
+      setDeletingId(id);
+      await deleteStudent(id);
+    } catch (err) {
+      setError('Ошибка при удалении студента');
+      console.error('Error deleting student:', err);
+    } finally {
+      setDeletingId(null);
+    }
+  };
+
   return (
     <div>
-      <AddStudent 
-        onCreateStudent={handleCreateStudent} 
-        isCreating={isCreating} 
+      <AddStudent
+        onCreateStudent={handleCreateStudent}
+        isCreating={isCreating}
       />
       
       {error && (
@@ -35,17 +50,18 @@ const Students = (): React.ReactElement => {
 
       <div>
         <h2>Список студентов</h2>
-        {students.map((student: StudentInterface) => (
-          <div key={student.id} style={{ marginBottom: '1rem', padding: '1rem', border: '1px solid #eee', borderRadius: '4px' }}>
-            <h3>
-              {student.last_name} {student.first_name} {student.middle_name}
-            </h3>
-            <p>Фамилия: {student.last_name}</p>
-            <p>Имя: {student.first_name}</p>
-            <p>Отчество: {student.middle_name}</p>
-            <p>ID группы: {student.groupId}</p>
-          </div>
-        ))}
+        {students.length === 0 ? (
+          <p>Студенты не найдены</p>
+        ) : (
+          students.map((student: StudentInterface) => (
+            <Student
+              key={student.id}
+              student={student}
+              onDelete={handleDeleteStudent}
+              isDeleting={deletingId === student.id}
+            />
+          ))
+        )}
       </div>
     </div>
   );
