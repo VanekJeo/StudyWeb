@@ -1,6 +1,7 @@
 import { json } from "stream/consumers";
 import { getUsersDb } from "../../../db/userDb";
 import { createUserDb } from "../../../db/userDb";
+import { NextApiRequest } from "next/types";
 
 export async function GET(): Promise<Response> {
   const users = await getUsersDb();
@@ -8,7 +9,7 @@ export async function GET(): Promise<Response> {
   return Response.json(users);
 };
 
-export async function POST(req: NextApiRequest): Promise<Response> {
+export async function POST(req: NextApiRequest): Promise<Response | undefined> {
   try {
     const user = await req.json();
 

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getStudentsDb, createStudentDb } from '@/db/studentDb';
+import { getStudentsDb, addStudentDb } from '@/db/studentDb';
 import type CreateStudentInterface from '@/types/CreateStudentInterface';
 
 export async function GET(): Promise<Response> {
@@ -15,7 +15,7 @@ export async function GET(): Promise<Response> {
 export async function POST(request: Request): Promise<Response> {
   try {
     const studentData: CreateStudentInterface = await request.json();
-    const newStudent = await createStudentDb(studentData);
+    const newStudent = await addStudentDb(studentData);
     
     return new Response(JSON.stringify(newStudent), {
       status: 201,
