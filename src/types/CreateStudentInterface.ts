@@ -1,6 +1,8 @@
 export default interface CreateStudentInterface {
-  first_name: string;
-  last_name: string;
-  middle_name: string;
+  firstName: string;
+  lastName: string;
+  middleName: string;
   groupId: number;
+  uuid?: string;
+  contacts?: string;
 }

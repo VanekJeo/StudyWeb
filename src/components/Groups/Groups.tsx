@@ -11,7 +11,9 @@ const Groups = (): React.ReactElement => {
     <div className={styles.Groups}>
       {groups.map((group: GroupInterface) => (
         <h2 key={group.id}>
+           {group.id}
           {group.name}
+          {group.contacts}
         </h2>
       ))}
     </div>

@@ -23,11 +23,10 @@ const Student = ({ student, onDelete, isDeleting = false }: StudentProps): React
           {student.last_name} {student.first_name} {student.middle_name}
         </h3>
         <div className={styles.studentDetails}>
-          <p><strong>Фамилия:</strong> {student.last_name}</p>
-          <p><strong>Имя:</strong> {student.first_name}</p>
-          <p><strong>Отчество:</strong> {student.middle_name || '—'}</p>
+          <p><strong>Фамилия:</strong> {student.lastName}</p>
+          <p><strong>Имя:</strong> {student.firstName}</p>
+          <p><strong>Отчество:</strong> {student.middleName}</p>
           <p><strong>ID группы:</strong> {student.groupId}</p>
-          <p><strong>ID:</strong> {student.id}</p>
         </div>
       </div>
       <button

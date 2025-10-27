@@ -30,11 +30,11 @@ const AddStudent = ({ onCreateStudent, isCreating }: AddStudentProps): React.Rea
       <h3>Добавить нового студента</h3>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div style={{ marginBottom: '1rem' }}>
-          <label htmlFor="last_name">Фамилия:</label>
+          <label htmlFor="lastName">Фамилия:</label>
           <input
-            id="last_name"
+            id="lastName"
             type="text"
-            {...register('last_name', { 
+            {...register('lastName', { 
               required: 'Фамилия обязательна',
               minLength: {
                 value: 2,
@@ -43,17 +43,17 @@ const AddStudent = ({ onCreateStudent, isCreating }: AddStudentProps): React.Rea
             })}
             style={{ display: 'block', width: '100%', padding: '0.5rem' }}
           />
-          {errors.last_name && (
-            <span style={{ color: 'red', fontSize: '0.875rem' }}>{errors.last_name.message}</span>
+          {errors.lastName && (
+            <span style={{ color: 'red', fontSize: '0.875rem' }}>{errors.lastName.message}</span>
           )}
         </div>
 
         <div style={{ marginBottom: '1rem' }}>
-          <label htmlFor="first_name">Имя:</label>
+          <label htmlFor="firstName">Имя:</label>
           <input
-            id="first_name"
+            id="firstName"
             type="text"
-            {...register('first_name', { 
+            {...register('firstName', { 
               required: 'Имя обязательно',
               minLength: {
                 value: 2,
@@ -62,17 +62,17 @@ const AddStudent = ({ onCreateStudent, isCreating }: AddStudentProps): React.Rea
             })}
             style={{ display: 'block', width: '100%', padding: '0.5rem' }}
           />
-          {errors.first_name && (
-            <span style={{ color: 'red', fontSize: '0.875rem' }}>{errors.first_name.message}</span>
+          {errors.firstName && (
+            <span style={{ color: 'red', fontSize: '0.875rem' }}>{errors.firstName.message}</span>
           )}
         </div>
 
         <div style={{ marginBottom: '1rem' }}>
-          <label htmlFor="middle_name">Отчество:</label>
+          <label htmlFor="middleName">Отчество:</label>
           <input
-            id="middle_name"
+            id="middleName"
             type="text"
-            {...register('middle_name')}
+            {...register('middleName')}
             style={{ display: 'block', width: '100%', padding: '0.5rem' }}
           />
         </div>
@@ -95,6 +95,17 @@ const AddStudent = ({ onCreateStudent, isCreating }: AddStudentProps): React.Rea
           {errors.groupId && (
             <span style={{ color: 'red', fontSize: '0.875rem' }}>{errors.groupId.message}</span>
           )}
+        </div>
+
+        {}
+        <div style={{ marginBottom: '1rem' }}>
+          <label htmlFor="contacts">Контакты (опционально):</label>
+          <input
+            id="contacts"
+            type="text"
+            {...register('contacts')}
+            style={{ display: 'block', width: '100%', padding: '0.5rem' }}
+          />
         </div>
 
         <button 
